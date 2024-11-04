@@ -1,6 +1,7 @@
 apiVersion: v2
 name: hugo-docs
 description: A Helm chart for Kubernetes
+icon: "https://static-00.iconduck.com/assets.00/hugo-icon-456x512-ghgrm1yx.png"
 
 # A chart can be either an 'application' or a 'library' chart.
 #
