@@ -31,7 +31,7 @@ spec:
       - name: git-sync
         secret:
           secretName: git-sync
-          defaultMode: 0440
+          defaultMode: "0440"
       - name: git-checkout
         emptyDir: {}
       containers:
