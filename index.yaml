@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  hugo-docs:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-11-04T22:44:12.066626519Z"
+    description: A Helm chart for Kubernetes
+    digest: 46cc83dc9549d810ed13d453771182735b4479b5621d7b78fc1f0f6be4ec8154
+    name: hugo-docs
+    type: application
+    urls:
+    - https://github.com/khoury-systems/khoury-helm-charts/releases/download/hugo-docs-1.0.0/hugo-docs-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-11-04T22:44:12.066633021Z"
