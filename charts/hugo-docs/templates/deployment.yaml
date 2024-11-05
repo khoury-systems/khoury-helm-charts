@@ -72,19 +72,26 @@ spec:
               containerPort: {{ .Values.hugo.service.port }}
               protocol: TCP
           livenessProbe:
-            failureThreshold: 5
             httpGet:
               path: /
               port: http
-            periodSeconds: 60
-            timeoutSeconds: 30
+            initialDelaySeconds: 1
+            timeoutSeconds: 10
+            failureThreshold: 20
           readinessProbe:
-            failureThreshold: 5
             httpGet:
               path: /
               port: http
-            periodSeconds: 60
-            timeoutSeconds: 30
+            initialDelaySeconds: 1
+            timeoutSeconds: 10
+            failureThreshold: 20
+          args:
+            - sh
+            - -c
+            - >
+              sleep 15;
+              cd /checkout;
+              /hugo server -s site/ --appendPort=false -e $ENVIRONMENT --bind 0.0.0.0 --baseURL $BASE_URL --buildDrafts
           securityContext:
             {{- toYaml .Values.hugo.securityContext | nindent 12 }}
           resources:
