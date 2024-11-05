@@ -94,6 +94,10 @@ spec:
               /hugo server -s site/ --appendPort=false -e $ENVIRONMENT --bind 0.0.0.0 --baseURL $BASE_URL --buildDrafts
           securityContext:
             {{- toYaml .Values.hugo.securityContext | nindent 12 }}
+          volumeMounts:
+          - name: git-checkout
+            mountPath: /checkout
+            readOnly: false
           resources:
             {{- toYaml .Values.hugo.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
