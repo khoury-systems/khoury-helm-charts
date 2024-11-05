@@ -7,7 +7,7 @@ This chart is used to deploy a [Hugo](https://gohugo.io) static site generator c
 1. Kubernetes cluster to install into.
 2. Git repo with hugo site code.
 3. A deploy key in that repo with at least Read access.
-4. A secret on the cluster with the private deploy key, as well as a known-hosts list for the git server's SSH fingerprint. (Secret needs to be named `git-sync` with 2 keys-value pairs, `ssh` with the private key and `known_hosts` with the git server's fingerprint.)
+4. A secret on the cluster with the private deploy key, as well as a known-hosts list for the git server's SSH fingerprint. (`git_sync.git.secretName` specified in the [values](./values.yaml) file must have 2 keys-value pairs, `ssh` with the private key and `known_hosts` with the git server's fingerprint.)
 5. An ingress controller and DNS set for any ingress you want to serve.
 6. (If SSL required) A premade SSL certificate to reference, cert-manager to generate one, or a reverse proxy.
 

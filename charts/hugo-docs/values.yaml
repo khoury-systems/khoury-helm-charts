@@ -13,6 +13,7 @@ git_sync:
   git:
     repo: ""
     branch: "main"
+    secretName: "git-sync"
   resources: 
     limits:
       cpu: 250m

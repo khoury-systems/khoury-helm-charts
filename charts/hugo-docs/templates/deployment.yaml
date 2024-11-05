@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: git-sync
         secret:
-          secretName: git-sync
+          secretName: {{ .Values.git_sync.git.secretName }}
           defaultMode: 0440
       - name: git-checkout
         emptyDir: {}
