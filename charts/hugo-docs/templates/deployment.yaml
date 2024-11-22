@@ -78,13 +78,12 @@ spec:
             initialDelaySeconds: 1
             timeoutSeconds: 10
             failureThreshold: 20
-          readinessProbe:
+          startupProbe:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 1
-            timeoutSeconds: 10
-            failureThreshold: 20
+            periodSeconds: 10
+            failureThreshold: 6
           args:
             - sh
             - -c
