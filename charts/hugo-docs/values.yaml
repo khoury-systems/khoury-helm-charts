@@ -29,7 +29,7 @@ hugo:
     repository: tsrats/hugo
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "v0.134.3-amd64"
+    tag: "v0.134.3"
   env:
     BASE_URL: "https://chart-example.local"
     ENVIRONMENT: "main"
