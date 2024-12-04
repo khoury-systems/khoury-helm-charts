@@ -1,4 +1,8 @@
+{{- if .Values.ingress.enabled }}
+1. Use the following URL for deployment:
+{{- else }}
 1. Get the application URL by running these commands:
+{{- end }}
 {{- if .Values.ingress.enabled }}
 {{- range $host := .Values.ingress.hosts }}
   {{- range .paths }}
