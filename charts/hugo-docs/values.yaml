@@ -25,6 +25,7 @@ git_sync:
     runAsUser: 65533 # git-sync user
     
 hugo:
+  buildDrafts: false
   image:
     repository: tsrats/hugo
     pullPolicy: IfNotPresent

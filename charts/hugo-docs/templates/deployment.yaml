@@ -90,7 +90,11 @@ spec:
             - >
               sleep 15;
               cd /checkout;
+              {{- if .Values.hugo.buildDrafts }}
               /hugo server -s site/ --appendPort=false -e $ENVIRONMENT --bind 0.0.0.0 --baseURL $BASE_URL --buildDrafts
+              {{- else}}
+              /hugo server -s site/ --appendPort=false -e $ENVIRONMENT --bind 0.0.0.0 --baseURL $BASE_URL
+              {{- end }}
           securityContext:
             {{- toYaml .Values.hugo.securityContext | nindent 12 }}
           volumeMounts:
