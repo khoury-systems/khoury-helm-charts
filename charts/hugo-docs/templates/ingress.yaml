@@ -1,9 +1,8 @@
 {{- if .Values.ingress.enabled -}}
+{{- $fullName := include "hugo-docs.fullname" . -}}
 {{- if .Values.oauth.enabled -}}
-{{- $fullName := include "hugo-docs.fullname"-oauth . -}}
 {{- $svcPort := .Values.oauth.service.port -}}
 {{- else }}
-{{- $fullName := include "hugo-docs.fullname" . -}}
 {{- $svcPort := .Values.hugo.service.port -}}
 {{- end }}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
