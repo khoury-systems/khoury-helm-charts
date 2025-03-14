@@ -1,0 +1,68 @@
+{{- if .Values.oauth.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hugo-docs.fullname" . }}-oauth
+  labels:
+    {{- include "hugo-docs.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.oauth.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "hugo-docs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "hugo-docs.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.oauth.podSecurityContext | nindent 8 }}
+      volumes:
+      - name: oauth2-proxy-config
+        configMap:
+          defaultMode: 420
+          name: {{ .Values.oauth.config.name }}
+      containers:
+        - name: oauth2-proxy
+          image: "{{ .Values.oauth.image.repository }}:{{ .Values.oauth.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.oauth.image.pullPolicy }}
+          args:
+          - --config 
+          - /oauth2-proxy.cfg
+          resources:
+            limits:
+              cpu: {{ .Values.oauth.resources.limits.cpu }}
+              memory: {{ .Values.oauth.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.oauth.resources.requests.cpu }}
+              memory: {{ .Values.oauth.resources.requests.memory }}
+          ports:
+          - name: oauth-proxy
+            containerPort: {{ .Values.oauth.service.port }}
+            protocol: TCP
+          volumeMounts:
+          - mountPath: /oauth2-proxy.cfg 
+            name: oauth2-proxy-config
+            readOnly: true
+            subPath: oauth2-proxy.cfg 
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

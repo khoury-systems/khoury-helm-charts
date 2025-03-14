@@ -56,6 +56,66 @@ hugo:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+oauth:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: quay.io/oauth2-proxy/oauth2-proxy
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "v7.8.1"
+  service:
+    type: ClusterIP
+    port: 4180
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  podSecurityContext: 
+    fsGroup: 65533
+  config:
+    name: oauth2-proxy-config
+    value: |
+      http_address="0.0.0.0:4180"
+      cookie_secret="CREATE_SECRET"
+      email_domains=["*"]
+      cookie_secure="false"
+      upstreams="http://{{ .Values.hugo-docs.fullname }}:1313"
+      cookie_domains=["DOMAIN"] # Required so cookie can be read on all subdomains.
+      whitelist_domains=["DOMAIN"] # Required to allow redirection back to original requested target.
+      
+      # keycloak provider
+      client_secret="CLIENT_SECRET"
+      client_id="CLIENT_ID"
+      redirect_url="REDIRECT_URL"
+      allowed_groups="*"
+      
+      oidc_issuer_url="OIDC_ISSUER"
+      provider="oidc"
+      provider_display_name="OIDC NAME"
+      skip_auth_routes = [
+         '.*'
+      ]
+      skip_provider_button="true"
+      cookie_expire="24h"
+      session_cookie_minimal="true"
+      scope='email openid'
+      reverse_proxy="true"
+    
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -74,8 +134,6 @@ podAnnotations: {}
 podSecurityContext: 
   fsGroup: 65533
 
-
-
 ingress:
   enabled: true
   #className: ""
@@ -91,8 +149,6 @@ ingress:
     - secretName: chart-example-tls
       hosts:
         - "chart-example.local"
-
-
 
 autoscaling:
   enabled: false
