@@ -9,9 +9,9 @@ spec:
   type: {{ .Values.oauth.service.type }}
   ports:
     - port: {{ .Values.oauth.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.oauth.service.port }}
       protocol: TCP
-      name: http
+      name: proxy
   selector:
     {{- include "hugo-docs.oauth.selectorLabels" . | nindent 4 }}
 {{- end }}
