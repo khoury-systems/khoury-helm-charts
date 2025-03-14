@@ -1,6 +1,11 @@
 {{- if .Values.ingress.enabled -}}
+{{- if .Values.oauth.enabled -}}
+{{- $fullName := include "hugo-docs.fullname" . -}}-oauth
+{{- $svcPort := .Values.oauth.service.port -}}
+{{- else }}
 {{- $fullName := include "hugo-docs.fullname" . -}}
 {{- $svcPort := .Values.hugo.service.port -}}
+{{- end }}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -50,15 +55,9 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                {{- if .Values.oauth.enabled -}}
-                name: {{ $fullName }}-oauth
-                port:
-                  number: {{ .Values.oauth.service.port }}
-                {{- else }}
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-                {{- end }}
               {{- else }}
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
