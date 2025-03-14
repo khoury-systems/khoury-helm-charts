@@ -51,6 +51,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Selector labels for oauth
+*/}}
+{{- define "hugo-docs.oauth.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "hugo-docs.name" . }}-oauth
+app.kubernetes.io/instance: {{ .Release.Name }}-oauth
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "hugo-docs.serviceAccountName" -}}

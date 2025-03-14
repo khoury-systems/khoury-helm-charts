@@ -13,5 +13,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "hugo-docs.selectorLabels" . | nindent 4 }}
+    {{- include "hugo-docs.oauth.selectorLabels" . | nindent 4 }}
 {{- end }}
