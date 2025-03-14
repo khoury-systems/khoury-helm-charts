@@ -1,6 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- if .Values.oauth.enabled -}}
-{{- $fullName := include "hugo-docs.fullname" . -}}-oauth
+{{- $fullName := include "hugo-docs.fullname"-oauth . -}}
 {{- $svcPort := .Values.oauth.service.port -}}
 {{- else }}
 {{- $fullName := include "hugo-docs.fullname" . -}}
