@@ -2,7 +2,7 @@
 {{- $fullName := include "hugo-docs.fullname" . -}}
 {{- $svcPort := .Values.hugo.service.port -}}
 {{ if .Values.oauth.enabled }}
-  {{- $fullName = $fullName "-oauth" -}}
+  {{- $fullName = print $fullName "-oauth" -}}
   {{- $svcPort = .Values.oauth.service.port -}}
 {{ end }}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
