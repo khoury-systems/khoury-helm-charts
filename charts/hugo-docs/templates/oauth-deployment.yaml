@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.oauth.replicaCount }}
   selector:
     matchLabels:
-      {{- include "hugo-docs.oatuh.selectorLabels" . | nindent 6 }}
+      {{- include "hugo-docs.oauth.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
