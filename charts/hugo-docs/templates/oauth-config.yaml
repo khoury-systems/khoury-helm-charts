@@ -4,5 +4,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.oauth.config.name }}
 data:
-  oauth2-proxy.cfg: {{ .Values.oauth.config.value }}
+  oauth2-proxy.cfg: {{ .Values.oauth.config.value | toYaml | indent 1 }}
 {{- end }}
