@@ -1,0 +1,94 @@
+{{- if .Values.policy.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "hugo-docs.fullname" . }}-ingress
+  labels:
+    {{- include "hugo-docs.labels" . | nindent 4 }}
+spec:
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values:
+                  - {{- .Values.policy.ingress.namespace -}}
+            matchLabels:
+              kubernetes.io/metadata.name: {{- .Values.policy.ingress.namespace -}}
+          podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - {{- .Values.policy.ingress.name -}}
+            matchLabels:
+              app.kubernetes.io/name: {{- .Values.policy.ingress.name -}}
+      ports:
+        {{- if .Values.oauth.enabled -}}
+        - port: {{ .Values.oauth.service.port }}
+          protocol: TCP
+        {{- else -}}
+        - port: {{ .Values.hugo.service.port }}
+          protocol: TCP
+        {{- end -}}
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/instance
+        operator: In
+        values:
+          {{- if .Values.oauth.enabled -}}
+          - {{ include "hugo-docs.fullname" . }}-oauth
+          {{- else -}}
+          - {{ include "hugo-docs.fullname" . }}
+          {{- end -}}
+    matchLabels:
+      {{- if .Values.oauth.enabled -}}
+      app.kubernetes.io/name: {{ include "hugo-docs.fullname" . }}-oauth
+      {{- else -}}
+      app.kubernetes.io/name: {{ include "hugo-docs.fullname" . }}
+      {{- end -}}
+  policyTypes:
+    - Ingress
+{{- if .Values.oauth.enabled -}}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "hugo-docs.fullname" . }}-proxy
+  labels:
+    {{- include "hugo-docs.labels" . | nindent 4 }}
+spec:
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values:
+                  - {{ .Release.Namespace }}
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Release.Namespace }}
+          podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - {{ include "hugo-docs.fullname" . }}-oauth
+            matchLabels:
+              app.kubernetes.io/name: {{ include "hugo-docs.fullname" . }}-oauth
+      ports:
+        - port: {{ .Values.hugo.service.port }}
+          protocol: TCP
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - {{ include "hugo-docs.fullname" . }}
+    matchLabels:
+      app.kubernetes.io/name: {{ include "hugo-docs.fullname" . }}
+  policyTypes:
+    - Ingress
+{{- end -}}
+{{- end -}}

@@ -138,6 +138,12 @@ podAnnotations: {}
 podSecurityContext: 
   fsGroup: 65533
 
+policy:
+  enabled: false
+  ingress:
+    name: "nginx-ingress"
+    namespace: "nginx-ingress"
+
 ingress:
   enabled: true
   #className: ""
