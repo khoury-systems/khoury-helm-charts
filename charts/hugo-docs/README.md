@@ -1,6 +1,6 @@
 # Hugo Docs System
 
-This chart is used to deploy a [Hugo](https://gohugo.io) static site generator container, along with a [git-sync](https://github.com/kubernetes/git-sync) container for staying up to date with a repo. It may in the future support an [oAuth](https://github.com/oauth2-proxy/oauth2-proxy) proxy as well. It can be used to target any hugo site repo, and run multiple instances for different branches. It assumes some prerequisites are already present.
+This chart is used to deploy a [Hugo](https://gohugo.io) static site generator container, along with a [git-sync](https://github.com/kubernetes/git-sync) container for staying up to date with a repo. It an also support an [OAuth](https://github.com/OAuth2-proxy/OAuth2-proxy) proxy as well. It can be used to target any hugo site repo, and run multiple instances for different branches. It assumes some prerequisites are already present.
 
 ## Prerequisites 
 
@@ -11,6 +11,11 @@ This chart is used to deploy a [Hugo](https://gohugo.io) static site generator c
 5. An ingress controller and DNS set for any ingress you want to serve.
 6. (If SSL required) A premade SSL certificate to reference, cert-manager to generate one, or a reverse proxy.
 
+If OAuth is also required, the following are necessary:
+1. An OIDC compatible system.
+2. A client configured on the OIDC system.
+3. A configuration file in the TOML format as per [docs](https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#config-options). (An example compatible with Keycloak is provided in the [values](./values.yaml) file.)
+ 
 ## Get Repository Info
 ```console
 helm repo add khoury https://helm.khoury.northeastern.edu/

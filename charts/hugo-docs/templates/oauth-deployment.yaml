@@ -38,12 +38,7 @@ spec:
           - --config 
           - /oauth2-proxy.cfg
           resources:
-            limits:
-              cpu: {{ .Values.oauth.resources.limits.cpu }}
-              memory: {{ .Values.oauth.resources.limits.memory }}
-            requests:
-              cpu: {{ .Values.oauth.resources.requests.cpu }}
-              memory: {{ .Values.oauth.resources.requests.memory }}
+            {{- toYaml .Values.oauth.resources | nindent 12 }}
           ports:
           - name: oauth-proxy
             containerPort: {{ .Values.oauth.service.port }}
