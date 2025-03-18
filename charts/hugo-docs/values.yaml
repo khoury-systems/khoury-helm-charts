@@ -140,6 +140,7 @@ podSecurityContext:
 
 policy:
   enabled: false
+  namespace: "default"
   ingress:
     name: "nginx-ingress"
     namespace: "nginx-ingress"
