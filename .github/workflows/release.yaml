@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: arc-runner-set
+    runs-on: helm-runner-set
     permissions:
       contents: write
     steps:
