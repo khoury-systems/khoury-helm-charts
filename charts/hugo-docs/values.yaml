@@ -52,13 +52,13 @@ hugo:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
-  securityContext: {}
+  securityContext:
     # capabilities:
     #   drop:
     #   - ALL
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
-    # runAsUser: 1000
+    runAsUser: 65533 # user same user id as git sync
 
 oauth:
   enabled: false
