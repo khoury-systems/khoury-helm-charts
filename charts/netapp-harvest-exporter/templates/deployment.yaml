@@ -4,12 +4,11 @@ metadata:
   name: {{ .Values.netapp.name }}-exporter
   labels:
     netapp_name: {{ .Values.netapp.name }}
-    {{- include "netapp-harvest-exporter.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "netapp-harvest-exporter.selectorLabels" . | nindent 6 }}
+      netapp_name: {{ .Values.netapp.name }}
   strategy:
     type: Recreate
   template:
