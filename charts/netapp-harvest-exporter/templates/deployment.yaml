@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "netapp-harvest-exporter.fullname" . }}
+  labels:
+    netapp_name: {{ .Values.netapp.name }}
+    {{- include "netapp-harvest-exporter.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "netapp-harvest-exporter.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - args:
+            - --poller
+            - {{ .Values.netapp.name }}
+            - --promPort
+            - "{{ .Values.promPort }}"
+            - --config
+            - /opt/harvest.yml
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          name: poller-{{ .Values.netapp.name }}
+          ports:
+            - containerPort: {{ .Values.promPort }}
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/harvest/cert
+              name: {{ .Values.netapp.name }}-claim
+            - mountPath: /opt/harvest.yml
+              name: {{ .Values.netapp.name }}-cm
+              subPath: harvest.yml
+      restartPolicy: Always
+      volumes:
+        - name: {{ .Values.netapp.name }}-claim
+          persistentVolumeClaim:
+            claimName: {{ .Values.netapp.name }}-claim
+        - configMap:
+            items:
+              - key: harvest.yml
+                path: harvest.yml
+            name: {{ .Values.netapp.name }}-cm
+          name: {{ .Values.netapp.name }}-cm

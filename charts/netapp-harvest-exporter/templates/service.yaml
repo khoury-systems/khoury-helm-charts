@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.netapp.name }}
+spec:
+  ports:
+    - name: "{{ .Values.promPort }}"
+      port: {{ .Values.promPort }}
+      targetPort: {{ .Values.promPort }}
+  selector:
+    netapp_name: {{ .Values.netapp.name }}
