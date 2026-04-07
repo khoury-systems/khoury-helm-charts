@@ -10,7 +10,9 @@ netapp:
     addr: ""
     username: ""
     password: ""
-    
+
+promPort: 12990
+
 image:
     repository: "ghcr.io/netapp/harvest"
     tag: "26.02.0-1"
