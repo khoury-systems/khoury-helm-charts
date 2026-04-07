@@ -12,6 +12,9 @@ spec:
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        netapp_name: {{ .Values.netapp.name }}
     spec:
       containers:
         - args:
