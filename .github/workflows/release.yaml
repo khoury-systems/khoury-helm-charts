@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: helm-runner-set
+    runs-on: khoury-systems-runner
     permissions:
       contents: write
     steps:
