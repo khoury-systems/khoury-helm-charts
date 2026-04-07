@@ -297,4 +297,16 @@ entries:
     urls:
     - https://github.com/khoury-systems/khoury-helm-charts/releases/download/hugo-docs-1.0.0/hugo-docs-1.0.0.tgz
     version: 1.0.0
-generated: "2025-04-04T15:42:40.304189745Z"
+  netapp-harvest-exporter:
+  - apiVersion: v2
+    appVersion: 26.02.0-1
+    created: "2026-04-07T21:16:46.202383578Z"
+    description: A Helm chart for Kubernetes
+    digest: f20cadb6916c44e0e11ca921c64834b1a865ea86799e8a251489b9f0b5fe6430
+    icon: https://netapp.github.io/harvest/26.02/assets/harvest.svg
+    name: netapp-harvest-exporter
+    type: application
+    urls:
+    - https://github.com/khoury-systems/khoury-helm-charts/releases/download/netapp-harvest-exporter-1.0.0/netapp-harvest-exporter-1.0.0.tgz
+    version: 1.0.0
+generated: "2026-04-07T21:16:46.202557115Z"
