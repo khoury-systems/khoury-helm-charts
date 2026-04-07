@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "netapp-harvest-exporter.fullname" . }}
+  name: {{ .Values.netapp.name }}-exporter
   labels:
     netapp_name: {{ .Values.netapp.name }}
     {{- include "netapp-harvest-exporter.labels" . | nindent 4 }}
