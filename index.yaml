@@ -300,6 +300,17 @@ entries:
   netapp-harvest-exporter:
   - apiVersion: v2
     appVersion: 26.02.0-1
+    created: "2026-04-08T13:26:42.965970692Z"
+    description: A Helm chart for Kubernetes
+    digest: a9aeb51d68b22061a9d85181dcb1f70ca6dd30341638734fdcc6319daa361f90
+    icon: https://netapp.github.io/harvest/26.02/assets/harvest.svg
+    name: netapp-harvest-exporter
+    type: application
+    urls:
+    - https://github.com/khoury-systems/khoury-helm-charts/releases/download/netapp-harvest-exporter-1.0.6/netapp-harvest-exporter-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
+    appVersion: 26.02.0-1
     created: "2026-04-07T21:35:22.76718483Z"
     description: A Helm chart for Kubernetes
     digest: 133d90a4cfe5ee4e260952de528112c640b53a84ce8208751f0b6a47aa9a7193
@@ -364,4 +375,4 @@ entries:
     urls:
     - https://github.com/khoury-systems/khoury-helm-charts/releases/download/netapp-harvest-exporter-1.0.0/netapp-harvest-exporter-1.0.0.tgz
     version: 1.0.0
-generated: "2026-04-07T21:35:22.767630815Z"
+generated: "2026-04-08T13:26:42.966053362Z"
