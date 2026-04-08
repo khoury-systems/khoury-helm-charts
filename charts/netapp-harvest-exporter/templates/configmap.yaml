@@ -8,8 +8,9 @@ data:
     Defaults:
         use_insecure_tls: true
         collectors:
-          - Zapi
-          - ZapiPerf
+          - Rest
+          - RestPerf
+          - Ems
         exporters:
           - prometheus
     Pollers:
