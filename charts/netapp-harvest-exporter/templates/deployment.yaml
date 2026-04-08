@@ -28,7 +28,7 @@ spec:
           name: poller-{{ .Values.netapp.name }}
           envFrom:
             - secretRef:
-              {{ .Values.netapp.secret_name }}
+              name: {{ .Values.netapp.secret_name }}
           ports:
             - containerPort: {{ .Values.promPort }}
               protocol: TCP
