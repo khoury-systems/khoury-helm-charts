@@ -3,22 +3,22 @@ data:
   harvest.yml: |
     Tools:
     Exporters:
-        prometheus1:
+        prometheus:
             exporter: Prometheus
-            port_range: 12990-14000
     Defaults:
         use_insecure_tls: true
         collectors:
           - Zapi
           - ZapiPerf
         exporters:
-          - prometheus1
+          - prometheus
     Pollers:
         {{ .Values.netapp.name }}:
             datacenter: {{ .Values.netapp.datacenter }}
             addr: {{ .Values.netapp.addr }}
-            username: {{ .Values.netapp.username }}
-            password: {{ .Values.netapp.password }}
+            prom_port: {{ .Values.promPort }}
+            username: ${USERNAME}
+            password: ${PASSWORD}
 kind: ConfigMap
 metadata:
   annotations:

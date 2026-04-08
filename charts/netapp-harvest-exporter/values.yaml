@@ -8,8 +8,7 @@ netapp:
     name: ""
     datacenter: ""
     addr: ""
-    username: ""
-    password: ""
+    secret_name: ""
 
 promPort: 12990
 

@@ -26,6 +26,9 @@ spec:
             - /opt/harvest.yml
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           name: poller-{{ .Values.netapp.name }}
+          envFrom:
+            - secretRef:
+              {{ .Values.netapp.secret_name }}
           ports:
             - containerPort: {{ .Values.promPort }}
               protocol: TCP
