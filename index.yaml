@@ -3,6 +3,17 @@ entries:
   hugo-docs:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-10-23T19:58:02.109515985Z"
+    description: A Helm chart for Kubernetes
+    digest: 1af603053b4d8b1e5fa781cc1b9b7797afa932c8a5e51074f7c0a55c2a43b089
+    icon: https://static-00.iconduck.com/assets.00/hugo-icon-456x512-ghgrm1yx.png
+    name: hugo-docs
+    type: application
+    urls:
+    - https://github.com/khoury-systems/khoury-helm-charts/releases/download/hugo-docs-1.2.3/hugo-docs-1.2.3.tgz
+    version: 1.2.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-04-04T15:42:40.30362121Z"
     description: A Helm chart for Kubernetes
     digest: fe4b47c9955670c4ce79c295c40d8545e69bcee247e2a07837afe0c087311823
@@ -386,4 +397,4 @@ entries:
     urls:
     - https://github.com/khoury-systems/khoury-helm-charts/releases/download/netapp-harvest-exporter-1.0.0/netapp-harvest-exporter-1.0.0.tgz
     version: 1.0.0
-generated: "2026-04-08T15:08:03.606076107Z"
+generated: "2026-10-23T19:58:02.109681458Z"
