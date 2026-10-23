@@ -6,10 +6,10 @@ replicaCount: 1
 
 git_sync:
   image:
-    repository: gcr.io/k8s-staging-git-sync/git-sync 
+    repository: registry.k8s.io/git-sync/git-sync
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "v4.3.0"
+    tag: "v4.7.1"
   git:
     repo: ""
     branch: "main"
